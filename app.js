@@ -1,9 +1,11 @@
-// Lugar en el que se guardan los nombres de los amigos
+// Lugar en el que se guardan los nombres de los amigos 
 const amigos = [];
 
 const add_friend_button = document.querySelector(".button-add");
 const friends_wrapper = document.getElementById("listaAmigos");
 const friend_name_input = document.querySelector("#amigo.input-name");
+const choised_friend = document.querySelector("#resultado.result-list");
+const button_draw = document.querySelector(".button-draw");
 
 add_friend_button.addEventListener("click", () => {
     const friend_name = friend_name_input.value;
@@ -23,4 +25,24 @@ add_friend_button.addEventListener("click", () => {
     friends_wrapper.appendChild(new_element);
 
     friend_name_input.value = "";
+});
+
+button_draw.addEventListener("click", () => {
+    if (amigos.length === 0) {
+        alert("No hay amigos en la lista para sortear");
+        return;
+    }
+
+    // Elegir un amigo al azar
+    const random_index = Math.floor(Math.random() * amigos.length);
+    const selected_friend = amigos[random_index];
+
+    // Limpiar la lista antes de agregar el nuevo amigo sorteado
+    choised_friend.innerHTML = "";
+
+    // Crear un elemento <li> para el amigo sorteado
+    const chosen_element = document.createElement("li");
+    chosen_element.innerHTML = selected_friend;
+
+    choised_friend.appendChild(chosen_element);
 });
